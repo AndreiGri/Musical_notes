@@ -4,7 +4,7 @@
 
 using namespace std;
 
-enum Note
+enum Note                                       // Перечисление нот
 {
     DO = 1,
     RE = 2,
@@ -20,51 +20,54 @@ int main()
     system("color 70");
     system("chcp 1251>nul");
 
-    string notes;
-    cout << " Введите номера нот: ";
-    cin >> notes;
-    int n{ stoi(notes) };
-    int mask = 0;
-        for (int i = 0; i < notes.size(); i++)
-        {
-            mask += n % 10;
+    string notes;                               // Строка для записи номеров нот аккорда
+    cout << " Введите номера нот от 1 до 7: ";  // Запрашиваем ноты аккорда
+    cin >> notes;                               // Записываем номера нот
+    int n{ stoi(notes) };                       // Преобразуем строку в число
+    int mask = 0;                               // Побитовая маска аккорда
+        for (int i = 0; i < notes.size(); i++)  // Используя длину строки в цикле for
+        {                                       // собираем маску аккорда
+            mask |= 1 << ((n % 10) - 1);
             n /= 10;
         }
 
-        if (mask & DO)
+        cout << " Аккорд: ";                    // Выводим ноты аккорда в консоль
+        if (mask & Note::DO)
         {
             cout << " DO";
         }
 
-        if (mask & RE)
+        if (mask & Note::RE)
         {
             cout << " RE";
         }
 
-        if (mask & MI)
+        if (mask & Note::MI)
         {
             cout << " MI";
         }
 
-        if (mask & FA)
+        if (mask & Note::FA)
         {
             cout << " FA";
         }
 
-        if (mask & SOL)
+        if (mask & Note::SOL)
         {
             cout << " SOL";
         }
-        
-        if (mask & LA)
+
+        if (mask & Note::LA)
         {
             cout << " LA";
         }
 
-        if (mask & SI)
+        if (mask & Note::SI)
         {
             cout << " SI";
         }
+
+        cout << endl;
 
     system("pause>nul");
     return 0;
